@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		        /*Two individual numbers used to produce a single unquiqe 
          number that no other pair of individual numbers can produce*/
-        BigDecimal num1 = new BigDecimal("99999999900");
+        BigDecimal num1 = new BigDecimal("99999199900");
         BigDecimal num2 = new BigDecimal("99999999");
 
         /*Converting and storing the result as a hex value as pairing in base10 
@@ -20,7 +20,7 @@ public class Main {
         //Outputing the result
         
 	}
-	public static BigDecimal pair(BigDecimal a, BigDecimal b) {
+	   public static BigDecimal pair(BigDecimal a, BigDecimal b) {
 
         BigDecimal l1 = new BigDecimal("-1");
         //Cantors pairing function only works for positive integers
@@ -34,7 +34,7 @@ public class Main {
             /*Calling depair function of the result which allows us to compare
              the results of the depair function with the two inputs of the pair
              function*/
-            return result;
+            return result.setScale(0, BigDecimal.ROUND_FLOOR);
         } else {
             return new BigDecimal("-1"); //Otherwise return rouge value
         }
@@ -49,12 +49,12 @@ public class Main {
         //Cantors depairing function:
         //long t = (int) (Math.floor((Math.sqrt(8 * z + 1) - 1) / 2));
         BigDecimal t=z.multiply(new BigDecimal("8")).add(new BigDecimal("1"))
-        .sqrt(mc).subtract(new BigDecimal("1")).divide(new BigDecimal("2"),0, BigDecimal.ROUND_DOWN);
+        .sqrt(mc).subtract(new BigDecimal("1")).divide(new BigDecimal("2"),0, BigDecimal.ROUND_FLOOR);
         //long x = t * (t + 3) / 2 - z;
         BigDecimal x=t.multiply(t.add(new BigDecimal("3"))).divide(new BigDecimal("2")).subtract(z);
         //long y = z - t * (t + 1) / 2;
         BigDecimal y=z.subtract(t.multiply(t.add(new BigDecimal("1"))).divide(new BigDecimal("2")));
-        return new BigDecimal[]{x, y}; //Returning an array containing the two numbers
+        return new BigDecimal[]{x.setScale(0, BigDecimal.ROUND_FLOOR), y.setScale(0, BigDecimal.ROUND_FLOOR)}; //Returning an array containing the two numbers
     }
 
 }
